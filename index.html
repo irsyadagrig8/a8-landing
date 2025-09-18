@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriG8 - Data Infrastructure for the Next Billion Farmers</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #a21942;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 16px;
+        }
+
+        .nav-links a:hover {
+            color: #a21942;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            background: linear-gradient(135deg, #f8f8f8 0%, #ffffff 100%);
+            padding-top: 80px;
+        }
+
+        .hero-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            width: 100%;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 0 0 auto;
+            text-align: right;
+            padding: 60px 0;
+        }
+
+        .tagline {
+            color: #6b9f3f;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+        }
+
+        .hero h1 {
+            font-size: clamp(48px, 8vw, 90px);
+            font-weight: 700;
+            color: #6b9f3f;
+            line-height: 1.1;
+            margin-bottom: 30px;
+        }
+
+        .hero-description {
+            font-size: 18px;
+            color: #666;
+            max-width: 800px;
+            margin: 0 0 40px auto;
+            line-height: 1.6;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: flex-end;
+            margin-top: 40px;
+        }
+
+        .btn {
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-block;
+            font-size: 16px;
+        }
+
+        .btn-primary {
+            background: #a21942;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #8a1537;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(162, 25, 66, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #a21942;
+            border: 2px solid #a21942;
+        }
+
+        .btn-secondary:hover {
+            background: #a21942;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Field Pattern Background */
+        .field-pattern {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 300px;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 50 Q 25 45, 50 50 T 100 50' stroke='%236b9f3f' stroke-width='0.5' fill='none' opacity='0.3'/%3E%3Cpath d='M0 60 Q 25 55, 50 60 T 100 60' stroke='%236b9f3f' stroke-width='0.5' fill='none' opacity='0.3'/%3E%3Cpath d='M0 70 Q 25 65, 50 70 T 100 70' stroke='%236b9f3f' stroke-width='0.5' fill='none' opacity='0.3'/%3E%3C/svg%3E") repeat;
+            opacity: 0.5;
+            z-index: 0;
+        }
+
+        /* Partners Section */
+        .partners {
+            padding: 60px 0;
+            background: white;
+            text-align: center;
+        }
+
+        .partners-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .partners h3 {
+            color: #6b9f3f;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 40px;
+        }
+
+        .partners-grid {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 80px;
+            flex-wrap: wrap;
+        }
+
+        .partner-logo {
+            filter: grayscale(100%);
+            opacity: 0.6;
+            transition: all 0.3s;
+            height: 60px;
+        }
+
+        .partner-logo:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+
+        /* About Section */
+        .about-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #6b9f3f 0%, #4a7030 100%);
+            color: white;
+            position: relative;
+        }
+
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .about-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .about-header h2 {
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
+        .about-header h3 {
+            font-size: clamp(32px, 5vw, 48px);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .about-description {
+            font-size: 18px;
+            line-height: 1.8;
+            max-width: 900px;
+            margin: 0 auto 30px;
+            opacity: 0.95;
+        }
+
+        .about-image-container {
+            margin: 60px 0;
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .about-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), 
+                        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 400'%3E%3Crect fill='%2348773e' width='1200' height='400'/%3E%3Cg opacity='0.3'%3E%3Cpath fill='%236b9f3f' d='M0 300 Q 300 250, 600 300 T 1200 300 L 1200 400 L 0 400 Z'/%3E%3C/g%3E%3C/svg%3E");
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Financing Section */
+        .financing-section {
+            padding: 100px 0;
+            background: white;
+            position: relative;
+        }
+
+        .financing-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .financing-content h2 {
+            font-size: clamp(32px, 5vw, 48px);
+            color: #333;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 30px;
+        }
+
+        .financing-content p {
+            font-size: 18px;
+            color: #666;
+            line-height: 1.8;
+        }
+
+        .financing-images {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .aerial-view {
+            width: 100%;
+            height: 300px;
+            border-radius: 20px;
+            background: linear-gradient(180deg, transparent, rgba(107, 159, 63, 0.3)),
+                        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 300'%3E%3Crect fill='%2348773e' width='600' height='300'/%3E%3Cg opacity='0.5'%3E%3Ccircle cx='100' cy='100' r='20' fill='%236b9f3f'/%3E%3Ccircle cx='200' cy='150' r='20' fill='%236b9f3f'/%3E%3Ccircle cx='300' cy='100' r='20' fill='%236b9f3f'/%3E%3C/g%3E%3C/svg%3E");
+            background-size: cover;
+            background-position: center;
+        }
+
+        .farmer-portrait {
+            width: 300px;
+            height: 300px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #e8c4a0, #c4916d);
+            margin-left: auto;
+        }
+
+        /* Insights Section */
+        .insights {
+            padding: 100px 0;
+            background: #f8f8f8;
+        }
+
+        .insights-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .insights-header {
+            margin-bottom: 60px;
+        }
+
+        .insights-header h3 {
+            color: #6b9f3f;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        .insights-header h2 {
+            font-size: 48px;
+            color: #6b9f3f;
+            font-weight: 700;
+        }
+
+        .insights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .insight-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .insight-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .insight-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #6b9f3f, #4a7030);
+        }
+
+        .insight-content {
+            padding: 30px;
+        }
+
+        .insight-content h3 {
+            font-size: 24px;
+            color: #6b9f3f;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .insight-content p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .read-more {
+            color: white;
+            background: #a21942;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .read-more:hover {
+            background: #8a1537;
+            transform: translateX(5px);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #48773e, #2d5a32);
+            color: white;
+            padding: 40px 0 20px;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .footer-logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .footer-nav {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .footer-nav a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .footer-nav a:hover {
+            opacity: 0.8;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 20px;
+            padding: 20px 0;
+        }
+
+        .social-icon {
+            width: 24px;
+            height: 24px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: white;
+            transition: background 0.3s;
+        }
+
+        .social-icon:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .footer-bottom {
+            padding-top: 20px;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 48px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .partners-grid {
+                gap: 40px;
+            }
+
+            .financing-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .insights-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">AgriG8</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#team">Team</a></li>
+                <li><a href="#careers">Careers</a></li>
+                <li><a href="#contact">Contact us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="field-pattern"></div>
+        <div class="hero-container">
+            <div class="hero-content">
+                <p class="tagline">• SMART FINANCING FOR SMALLHOLDER FARMERS</p>
+                <h1>Data infrastructure for the next billion farmers</h1>
+                <p class="hero-description">
+                    By translating agronomic data into risk signals, AgriG8 bridges the gap between the field and financial systems—so lending can reach the people who grow our food.
+                </p>
+                <div class="cta-buttons">
+                    <a href="#" class="btn btn-primary">Read our Whitepaper →</a>
+                    <a href="#" class="btn btn-secondary">Work with us →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners Section -->
+    <section class="partners">
+        <div class="partners-container">
+            <h3>• PROUDLY BACKED BY</h3>
+            <div class="partners-grid">
+                <div style="font-size: 32px; font-weight: 600; color: #666;">trendlines</div>
+                <div style="font-size: 32px; font-weight: 600; color: #666;">golden<br>sunland</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section">
+        <div class="about-container">
+            <div class="about-header">
+                <h2>• ABOUT US</h2>
+                <h3>We help rice farmers adopt optimized and sustainable practices.</h3>
+            </div>
+            <p class="about-description">
+                AgriG8 provides a unique farmer-focused experience, which provides farmers the ability to increase their yield and nutrient efficiency, while enabling them to reduce their carbon footprint and be certified sustainable.
+            </p>
+            <div class="about-image-container">
+                <div class="about-image"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Financing Section -->
+    <section class="financing-section">
+        <div class="financing-container">
+            <div class="financing-content">
+                <h2>We provide institutional lenders the ability to close the smallholder farmer financing gap.</h2>
+                <p>
+                    Through predictive forecasts for loan origination and credit assurance, and by adding sustainability metrics alongside financial returns, lenders can break the vicious cycle of farmers being both victims and contributors to climate change.
+                </p>
+            </div>
+            <div class="financing-images">
+                <div class="aerial-view"></div>
+                <div class="farmer-portrait"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Insights Section -->
+    <section class="insights">
+        <div class="insights-container">
+            <div class="insights-header">
+                <h3>• RECENT INSIGHTS</h3>
+                <h2>Insights & News</h2>
+            </div>
+            <div class="insights-grid">
+                <article class="insight-card">
+                    <div class="insight-image"></div>
+                    <div class="insight-content">
+                        <h3>Technologies for smallholder farmers – a balancing act</h3>
+                        <p>AgriG8's multi-data approach with farmer's self-recorded data solves the problem of lenders investing in sustainable agriculture.</p>
+                        <a href="#" class="read-more">Read more →</a>
+                    </div>
+                </article>
+                <article class="insight-card">
+                    <div class="insight-image" style="background: linear-gradient(135deg, #c4916d, #8b6239);"></div>
+                    <div class="insight-content">
+                        <h3>How This Entrepreneur's New Agri-Fintech Startup Is Helping Underserved Farmers To Stay Competitive</h3>
+                        <p>AgriG8's CEO, David Chen, speaks with Tatler about his vision for Southeast Asia's rice industry.</p>
+                        <a href="#" class="read-more">Read more →</a>
+                    </div>
+                </article>
+                <article class="insight-card">
+                    <div class="insight-image" style="background: white; display: flex; align-items: center; justify-content: center; font-size: 32px; color: #666;">trendlines</div>
+                    <div class="insight-content">
+                        <h3>Trendlines invests in agri-fintech company AgriG8</h3>
+                        <p>The Trendlines Group invests in Agrig8 in its first foray into the agri-fintech space.</p>
+                        <a href="#" class="read-more">Read more →</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-logo">AgriG8</div>
+                <ul class="footer-nav">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#team">Team</a></li>
+                    <li><a href="#careers">Careers</a></li>
+                    <li><a href="#contact">Contact us</a></li>
+                </ul>
+            </div>
+            <div class="footer-social">
+                <a href="#" class="social-icon">✉</a>
+                <a href="#" class="social-icon">in</a>
+            </div>
+            <div class="footer-bottom">
+                © 2025 Agrig8 Pte. Ltd. All rights reserved.
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
