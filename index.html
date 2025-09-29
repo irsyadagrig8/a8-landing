@@ -40,9 +40,12 @@
         }
 
         .logo {
-            font-size: 28px;
-            font-weight: bold;
-            color: #a21942;
+            height: 40px;
+        }
+
+        .logo img {
+            height: 100%;
+            width: auto;
         }
 
         .nav-links {
@@ -190,20 +193,101 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 80px;
+            gap: 60px;
             flex-wrap: wrap;
         }
 
+        .partner-link {
+            display: inline-block;
+            transition: transform 0.3s;
+        }
+
+        .partner-link:hover {
+            transform: translateY(-5px);
+        }
+
         .partner-logo {
+            height: 50px;
+            width: auto;
             filter: grayscale(100%);
-            opacity: 0.6;
+            opacity: 0.7;
             transition: all 0.3s;
-            height: 60px;
         }
 
         .partner-logo:hover {
             filter: grayscale(0%);
             opacity: 1;
+        }
+
+        /* Team Section */
+        .team-section {
+            padding: 100px 0;
+            background: white;
+        }
+
+        .team-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .team-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .team-header h2 {
+            color: #6b9f3f;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        .team-header h3 {
+            font-size: clamp(32px, 5vw, 48px);
+            color: #333;
+            font-weight: 700;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 60px;
+            margin-top: 60px;
+        }
+
+        .team-member {
+            text-align: center;
+        }
+
+        .member-photo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .team-member:hover .member-photo {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .member-name {
+            font-size: 20px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .member-role {
+            font-size: 16px;
+            color: #a21942;
+            font-weight: 600;
         }
 
         /* About Section */
@@ -258,8 +342,7 @@
         .about-image {
             width: 100%;
             height: 400px;
-            background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), 
-                        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 400'%3E%3Crect fill='%2348773e' width='1200' height='400'/%3E%3Cg opacity='0.3'%3E%3Cpath fill='%236b9f3f' d='M0 300 Q 300 250, 600 300 T 1200 300 L 1200 400 L 0 400 Z'/%3E%3C/g%3E%3C/svg%3E");
+            background: url("images/hero1.jpg");
             background-size: cover;
             background-position: center;
         }
@@ -305,8 +388,7 @@
             width: 100%;
             height: 300px;
             border-radius: 20px;
-            background: linear-gradient(180deg, transparent, rgba(107, 159, 63, 0.3)),
-                        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 300'%3E%3Crect fill='%2348773e' width='600' height='300'/%3E%3Cg opacity='0.5'%3E%3Ccircle cx='100' cy='100' r='20' fill='%236b9f3f'/%3E%3Ccircle cx='200' cy='150' r='20' fill='%236b9f3f'/%3E%3Ccircle cx='300' cy='100' r='20' fill='%236b9f3f'/%3E%3C/g%3E%3C/svg%3E");
+            background: url("images/hero2.jpg");
             background-size: cover;
             background-position: center;
         }
@@ -315,7 +397,9 @@
             width: 300px;
             height: 300px;
             border-radius: 20px;
-            background: linear-gradient(135deg, #e8c4a0, #c4916d);
+            background: url("images/hero3.jpg");
+            background-size: cover;
+            background-position: center;
             margin-left: auto;
         }
 
@@ -491,10 +575,15 @@
 
             .cta-buttons {
                 flex-direction: column;
-                align-items: center;
+                align-items: flex-end;
             }
 
             .partners-grid {
+                gap: 30px;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
                 gap: 40px;
             }
 
@@ -518,18 +607,18 @@
     <!-- Header -->
     <header>
         <nav>
-            <div class="logo">AgriG8</div>
+            <div class="logo">
+                <img src="images/a8main.png" alt="AgriG8">
+            </div>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
-                <li><a href="#team">Team</a></li>
-                <li><a href="#careers">Careers</a></li>
-                <li><a href="#contact">Contact us</a></li>
+                <li><a href="mailto:contact@agrig8.com">Contact us</a></li>
             </ul>
         </nav>
     </header>
 
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero" id="home">
         <div class="field-pattern"></div>
         <div class="hero-container">
             <div class="hero-content">
@@ -539,8 +628,8 @@
                     By translating agronomic data into risk signals, AgriG8 bridges the gap between the field and financial systems—so lending can reach the people who grow our food.
                 </p>
                 <div class="cta-buttons">
-                    <a href="#" class="btn btn-primary">Read our Whitepaper →</a>
-                    <a href="#" class="btn btn-secondary">Work with us →</a>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSebDWJUH8S3fVJpY09rqF1xVSFMIXP6mVHNPEzmqKU1jCycjw/viewform?usp=send_form" target="_blank" class="btn btn-primary">Read our Whitepaper →</a>
+                    <a href="mailto:contact@agrig8.com" class="btn btn-secondary">Work with us →</a>
                 </div>
             </div>
         </div>
@@ -551,8 +640,45 @@
         <div class="partners-container">
             <h3>• PROUDLY BACKED BY</h3>
             <div class="partners-grid">
-                <div style="font-size: 32px; font-weight: 600; color: #666;">trendlines</div>
-                <div style="font-size: 32px; font-weight: 600; color: #666;">golden<br>sunland</div>
+                <a href="https://www.betterbite.vc/post/new-investment-agrig8" target="_blank" class="partner-link">
+                    <img src="images/betterbiteventures.png" alt="BetterBite Ventures" class="partner-logo">
+                </a>
+                <a href="#" class="partner-link">
+                    <img src="images/gsl.png" alt="Golden Sunland" class="partner-logo">
+                </a>
+                <a href="#" class="partner-link">
+                    <img src="images/seedscapital.png" alt="Seeds Capital" class="partner-logo">
+                </a>
+                <a href="https://www.trendlines.com/news/trendlines-invests-in-agri-fintech-company-agrig8/" target="_blank" class="partner-link">
+                    <img src="images/trendlines.jpg" alt="Trendlines" class="partner-logo">
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section" id="team">
+        <div class="team-container">
+            <div class="team-header">
+                <h2>• OUR TEAM</h2>
+                <h3>Leadership</h3>
+            </div>
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="images/david.jpg" alt="David Chen CY" class="member-photo">
+                    <h3 class="member-name">David Chen CY</h3>
+                    <p class="member-role">CEO</p>
+                </div>
+                <div class="team-member">
+                    <img src="images/joshua.png" alt="Joshua Tan SP" class="member-photo">
+                    <h3 class="member-name">Joshua Tan SP</h3>
+                    <p class="member-role">COO</p>
+                </div>
+                <div class="team-member">
+                    <img src="images/aries.jpg" alt="Aries Dwiputera Tan" class="member-photo">
+                    <h3 class="member-name">Aries Dwiputera Tan</h3>
+                    <p class="member-role">CSO</p>
+                </div>
             </div>
         </div>
     </section>
@@ -598,27 +724,27 @@
             </div>
             <div class="insights-grid">
                 <article class="insight-card">
-                    <div class="insight-image"></div>
+                    <div class="insight-image" style="background: url('images/news1_inclusivebiz.jpg'); background-size: cover; background-position: center;"></div>
                     <div class="insight-content">
                         <h3>Technologies for smallholder farmers – a balancing act</h3>
                         <p>AgriG8's multi-data approach with farmer's self-recorded data solves the problem of lenders investing in sustainable agriculture.</p>
-                        <a href="#" class="read-more">Read more →</a>
+                        <a href="https://www.inclusivebusiness.net/clued-in/23/article/5759" target="_blank" class="read-more">Read more →</a>
                     </div>
                 </article>
                 <article class="insight-card">
-                    <div class="insight-image" style="background: linear-gradient(135deg, #c4916d, #8b6239);"></div>
+                    <div class="insight-image" style="background: url('images/news2_tatler.png'); background-size: cover; background-position: center;"></div>
                     <div class="insight-content">
                         <h3>How This Entrepreneur's New Agri-Fintech Startup Is Helping Underserved Farmers To Stay Competitive</h3>
                         <p>AgriG8's CEO, David Chen, speaks with Tatler about his vision for Southeast Asia's rice industry.</p>
-                        <a href="#" class="read-more">Read more →</a>
+                        <a href="https://www.tatlerasia.com/gen-t/leadership/this-agritech-entrepreneurs-new-startup-is-helping-myanmars-farmers-stay-competitive" target="_blank" class="read-more">Read more →</a>
                     </div>
                 </article>
                 <article class="insight-card">
-                    <div class="insight-image" style="background: white; display: flex; align-items: center; justify-content: center; font-size: 32px; color: #666;">trendlines</div>
+                    <div class="insight-image" style="background: url('images/news3_UNDPclimate.jpg'); background-size: cover; background-position: center;"></div>
                     <div class="insight-content">
-                        <h3>Trendlines invests in agri-fintech company AgriG8</h3>
-                        <p>The Trendlines Group invests in Agrig8 in its first foray into the agri-fintech space.</p>
-                        <a href="#" class="read-more">Read more →</a>
+                        <h3>AgriG8 Wins UNDP Intelligence for Climate & Nature Prize</h3>
+                        <p>AgriG8 was awarded the prestigious UNDP prize for helping smallholder rice farmers access finance and adopt climate-friendly farming practices, strengthening climate resilience and food security in Asia.</p>
+                        <a href="https://www.linkedin.com/posts/undpclimate_climateaction-naturetech-sustainableagriculture-activity-7305901134571843586-veYQ/" target="_blank" class="read-more">Read more →</a>
                     </div>
                 </article>
             </div>
@@ -632,14 +758,12 @@
                 <div class="footer-logo">AgriG8</div>
                 <ul class="footer-nav">
                     <li><a href="#home">Home</a></li>
-                    <li><a href="#team">Team</a></li>
-                    <li><a href="#careers">Careers</a></li>
-                    <li><a href="#contact">Contact us</a></li>
+                    <li><a href="mailto:contact@agrig8.com">Contact us</a></li>
                 </ul>
             </div>
             <div class="footer-social">
-                <a href="#" class="social-icon">✉</a>
-                <a href="#" class="social-icon">in</a>
+                <a href="mailto:contact@agrig8.com" class="social-icon">✉</a>
+                <a href="https://www.linkedin.com/company/agrig8tl/" target="_blank" class="social-icon">in</a>
             </div>
             <div class="footer-bottom">
                 © 2025 Agrig8 Pte. Ltd. All rights reserved.
